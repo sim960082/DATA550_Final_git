@@ -1,6 +1,6 @@
 # Sim Fan DATA550 final report-4
 
-
+data is put at `raw_data` folder
 
 ------------------------------------------------------------------------
 
