@@ -1,0 +1,75 @@
+---
+title: 'Final Project 4:Github'
+author: "Sim Fan"
+date: "`r Sys.Date()`"
+output: html_document
+---
+# Introduction section
+
+## the data set
+CDC analyzes BRFSS data for metropolitan and micropolitan statistical areas (MMSAs), to provide localized health information that can help public health practitioners identify local emerging health problems, plan and evaluate local responses, and efficiently allocate resources to specific needs.
+
+The Selected Metropolitan/Micropolitan Area Risk Trends of BRFSS SMART BRFSS) uses BRFSS data to provide prevalence rates for selected conditions and behaviors for cities and their surrounding counties.
+
+## the analysis objectives
+Whether drinking amount is related to general health
+
+
+```{r ,loading_data, echo=TRUE, warning=FALSE, message=FALSE, results='hide'}
+library(readr)
+library(tibble)
+library(knitr)
+here::i_am("project.Rmd")
+
+data <- readRDS(
+  file = here::here("derived_data/data_clean.rds")
+)
+
+```
+
+## Graphical analysis
+
+Below we report a scatter plot of General health and Average Drinking
+
+```{r, plot-data}
+#| fig.align = "center",
+#| out.width = "600px"
+knitr::include_graphics(
+  here::here("figures/scatterplot.png")
+)
+```
+
+### text describing the figure
+we can visually see that for people who has bad general health, the possibility of it drinking more alcohol per 30days are higher
+
+## Regression analysis
+```{r, fit-primary-model}
+regression_table <- readRDS(
+  file = here::here("tables/regression_table.rds")
+)
+regression_table
+```
+
+please notice that we change the type of variable of General Health from ordinal to binomial
+where if General Health =>3 then General Health=1
+else General Health=0
+
+## Result of the Test
+
+it seems like the AVG ALCOHOLIC DRINKS PER DAY IN PAST 30 is the predictor for the general health. 
+for each unit of drinks added, the probability of being poor general health will increase by exp(0.06)-1 in odds.
+
+## Plot for the result
+```{r, figure, message=FALSE}
+bi_mod <- readRDS(
+  file = here::here("derived_data/model.rds")
+)
+
+library(effects)
+plot(allEffects(bi_mod, xlevels= list (AVEDRNK2_R=1:20)))
+
+```
+
+### Text describing the figure
+we can see the effect for AVG ALCOHOLIC DRINKS PER DAY IN PAST 30 to general health. 
+the effect is = for each unit of drinks added, the probability of being poor general health will increase by exp(0.06)-1 in odds.
