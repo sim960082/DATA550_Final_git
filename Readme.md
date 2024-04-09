@@ -36,6 +36,8 @@ data is put at `raw_data` folder
   - contains the make commands for run the assignment
 ------------------------------------------------------------------------
 
+please type `make install` in terminal to get all needed R packages
+
 please type `make data_cleaning` in terminal to proceed data cleaning and create cleaned data
 
 please type `make scatter` in terminal to create a scatterplot
@@ -45,3 +47,5 @@ please type `make model` to create model
 please type `make render_report` to render report
 
 please type `make clean` to clean all the report, .rds files, and plots.
+
+
