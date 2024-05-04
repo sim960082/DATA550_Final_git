@@ -1,7 +1,10 @@
 # Sim Fan DATA550 final report-5
 data is put at `raw_data` folder
 
-please type `docker build -t sim960082/data550final_3`to start docker
+### docker build README
+
+please type `docker build -t sim960082/data550final_3`to build the Docker image
+
 ------------------------------------------------------------------------
 
 ## Initial code description
@@ -48,6 +51,7 @@ please type `make render_report` to render report
 
 please type `make clean` to clean all the report, .rds files, and plots.
 
+docker run README part
 please type `make final`to build the report 
 
 
