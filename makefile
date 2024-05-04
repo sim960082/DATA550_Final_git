@@ -18,3 +18,13 @@ install:
 .PHONY: clean
 clean:
 	rm -f tables/*.rds && rm -f project.html && rm -f reports/*.rds && rm -f figures/*.png && rm -f derived_data/*.rds
+	
+PJF = project.Rmd code/00_clean_data code/01_make_scatter code/02_models code/03_render_report
+RF = renv.lock renv/activate.R renv/setting.dcf
+
+project_image: Dockerfile $(PJF) $(RF)
+	docker build -t project_image .
+	touch&@
+	
+final: project_image
+	docker run -v "sim960082/data550final_3"/$(pwd)/project":/project/fianl_report project_image bash
